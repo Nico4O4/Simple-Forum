@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Forum by: Nico4O4</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <h1>Hi and welcome to my forum!</h1>
+    <h5>Have a nice day!</h5>
+
+    <form 
+        hx-post="/beitrag_posten" 
+        hx-swap="innerHTML" 
+        hx-on:htmx:after-request="this.reset()">
+                
+        <input 
+        name="username" 
+        placeholder="Your Name...">
+
+        <input 
+        name="nachricht"
+        placeholder="Deine Nachricht...">
+
+        <button>Send post</button>            
+    </form>    
+</body>
+</html>

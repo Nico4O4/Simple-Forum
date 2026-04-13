@@ -1,0 +1,36 @@
+{% for EIN_todo in todos %} 
+<div>
+    <input name="text" 
+    value="{{EIN_todo.user_object_SAVE_HERE}}"
+    
+    hx-put="/todos/{{EIN_todo.randomID_object_SAVE_HERE}}"
+    
+    hx-target="#todos"
+    hx-swap="innerHTML" 
+    hx-trigger="change">    
+    
+
+    
+    <input type="checkbox"
+    {% if EIN_todo.done_oject_SAVE_HERE %} 
+        checked="true"
+    {% endif %}
+    
+    hx-post="/todos/{{EIN_todo.randomID_object_SAVE_HERE}}/toggle" 
+    
+    hx-target="#todos"
+    hx-swap="innerHTML"
+    hx-trigger="click">
+
+
+
+    <input type="button"
+    value="Entfernen"
+    
+    hx-post="/todos/{{EIN_todo.randomID_object_SAVE_HERE}}/delete"
+    
+    hx-target="#todos"
+    hx-swap="innerHTML"
+    hx-trigger="click">
+</div>
+{% endfor %}

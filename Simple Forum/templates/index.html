@@ -16,25 +16,31 @@
 
     <div>   <!--App und Funktionen-->
         <section>
-            
-            <form hx-post="/todos" hx-target="#todos" hx-swap="innerHTML" hx-on:htmx:after-request="this.reset()">
+        
+            <form hx-post="/forum" hx-target="#beitrag_speicher_list" hx-swap="innerHTML" hx-on:htmx:after-request="this.reset()">
                 
-                <textarea rows="30" cols="90" name="todo">
-                
+                <input placeholder="Your Name...">
+
+
+                <textarea rows="30" cols="40" name="todo" placeholder="Start writing...">
+                Start writing...
                 </textarea>
+                
+                
                 <button>Hochladen...</button>
             
             </form>   
             
-            <div id="todos" 
-            hx-get="/todos" 
+            <div id="beitrag_speicher_list" 
+            hx-get="/forum" 
             hx-trigger="load" 
             hx-swap="innerHTML">
-        
-        </div> 
+            </div> 
                     
         </section>
     </div>
 
 </body>
 </html> 
+
+<!--startseite was per GET direkt aufgerufen wird-->

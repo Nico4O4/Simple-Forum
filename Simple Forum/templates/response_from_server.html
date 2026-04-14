@@ -1,0 +1,42 @@
+{% for EIN_beitrag in beiträge_kiste %} 
+<div>
+    <input name="text" 
+    value="{{EIN_beitrag.user_object_SAVE_HERE}}"
+    
+    hx-put="/forum/{{EIN_beitrag.randomID_object_SAVE_HERE}}"
+    
+    hx-target="#beitrag_speicher_list"
+    hx-swap="innerHTML" 
+    hx-trigger="change">    
+    
+
+    
+    <!--<input type="checkbox"
+    {% if EIN_todo.done_oject_SAVE_HERE %} 
+        checked="true"
+    {% endif %}
+    
+    hx-post="/todos/{{EIN_todo.randomID_object_SAVE_HERE}}/toggle" 
+    
+    hx-target="#todos"
+    hx-swap="innerHTML"
+    hx-trigger="click">
+    -->
+
+
+    <input type="button"
+    value="Entfernen"
+    
+    hx-post="/forum/{{EIN_beitrag.randomID_object_SAVE_HERE}}/delete"
+    
+    hx-target="#beitrag_speicher_list"
+    hx-swap="innerHTML"
+    hx-trigger="click">
+</div>
+{% endfor %}
+<!--das ist die datei die die request enthält die vom serverr komme
+es ist die "antwort" datei die voll mit html fragmenten ist
+ein button klick auf "entferrnen" macht eine hx POST anfragen an diese route
+die api führt das aus was in der route steht
+es wird nicht die ganze datei ausgeführt auf button klick
+sondern nur der betroffene berreich und das sollte die magie von htmx sein-->>

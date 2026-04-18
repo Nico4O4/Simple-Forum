@@ -24,12 +24,14 @@ async def show_index_frontend(request: Request):
 
 
 @app.post("/hochladen", response_class=HTMLResponse)
-async def create_beitrag(request: Request, kommentar_von_usersky: Annotated[str, Form()]):
+async def create_beitrag(request: Request, kommentar_von_usersky: Annotated[str, Form()],
+                         username_usersky: Annotated[str, Form()]):
     
     return jja2_templates.TemplateResponse(
         request=request,
         name="response_from_server.html",
-        context={"kommentar_von_user_daten_beinhalter": kommentar_von_usersky}
+        context={"kommentar_user_KEY": kommentar_von_usersky,
+                 "username_KEY": username_usersky}
     )
 #KEY muss gleich heisen wie variable im TEMPLATE VON JINJA2 damit ein austausch stattfinden kann
 #VALUE kann sonst wie heisen es enthält mein INPUT (DATEN) vom index.html (input feld)
@@ -37,3 +39,7 @@ async def create_beitrag(request: Request, kommentar_von_usersky: Annotated[str,
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
+
+
+#wenn man zur site gebracht wird per post request nochmals ne art endpoint logik / upload
+#logik schreiben das man weiterhin posts schreiben kann

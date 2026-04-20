@@ -24,24 +24,15 @@ async def show_index_frontend(request: Request):
 
 
 @app.post("/hochladen", response_class=HTMLResponse)
-async def create_beitrag(request: Request, kommentar_von_usersky: Annotated[str, Form()], username_usersky: Annotated[str, Form()], empty_usersky: str = "anonym"):
+async def create_beitrag(request: Request, kommentar_von_usersky = str = Form() = "nothing", username_usersky = str = Form() = "Hallo"):
 
-    if username_usersky == " ":
-        empty_usersky = username_usersky
-        empty_usersky = "Anonym"
-        
-        return jja2_templates.TemplateResponse(
+    return jja2_templates.TemplateResponse(    
         request=request,
         name="response_from_server.html",
-        context={"kommentar_user_KEY": kommentar_von_usersky, "username_KEY": empty_usersky})
+        context={"kommentar_user_KEY": kommentar_von_usersky, "username_KEY": username_usersky}
+        )
 
 
-    else:
-
-        return jja2_templates.TemplateResponse(
-            request=request,
-            name="response_from_server.html",
-            context={"kommentar_user_KEY": kommentar_von_usersky, "username_KEY": username_usersky})
 #eventuell javascript nötig?
 
 #KEY muss gleich heisen wie variable im TEMPLATE VON JINJA2 damit ein austausch stattfinden kann

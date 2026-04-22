@@ -22,9 +22,11 @@ async def show_index_frontend(request: Request):
         name="index.html"
         )
 
+default_usr = "Anonym"
+default_comment = "No comment"
 
 @app.post("/hochladen", response_class=HTMLResponse)
-async def create_beitrag(request: Request, kommentar_von_usersky = str = Form() = "nothing", username_usersky = str = Form() = "Hallo"):
+async def create_beitrag(request: Request, kommentar_von_usersky = Form(default_comment), username_usersky = Form(default_usr)):
 
     return jja2_templates.TemplateResponse(    
         request=request,
@@ -33,7 +35,6 @@ async def create_beitrag(request: Request, kommentar_von_usersky = str = Form() 
         )
 
 
-#eventuell javascript nötig?
 
 #KEY muss gleich heisen wie variable im TEMPLATE VON JINJA2 damit ein austausch stattfinden kann
 #VALUE kann sonst wie heisen es enthält mein INPUT (DATEN) vom index.html (input feld)

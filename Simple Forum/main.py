@@ -5,7 +5,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.encoders import jsonable_encoder
 from uuid import uuid4
 from typing import Annotated, Union
-
+from pydantic import BaseModel
+from fastapi.responses import HTMLResponse, RedirectResponse
 
 app = FastAPI()
 
@@ -13,6 +14,9 @@ app = FastAPI()
 beitrag_speicher_list =  []
 
 jja2_templates = Jinja2Templates(directory="templates")
+
+default_usr = "Anonym"
+
 
 @app.get("/", response_class=HTMLResponse)
 async def show_index_frontend(request: Request):
@@ -22,19 +26,32 @@ async def show_index_frontend(request: Request):
         name="index.html"
         )
 
-default_usr = "Anonym"
-default_comment = "No comment"
+
 
 @app.post("/hochladen", response_class=HTMLResponse)
-async def create_beitrag(request: Request, kommentar_von_usersky = Form(default_comment), username_usersky = Form(default_usr)):
+async def create_beitrag(request: Request, kommentar_von_usersky = Form(), 
+                         username_usersky = Form(default_usr)
+                         ):
 
     return jja2_templates.TemplateResponse(    
         request=request,
         name="response_from_server.html",
-        context={"kommentar_user_KEY": kommentar_von_usersky, "username_KEY": username_usersky}
+        context={"kommentar_user_KEY": kommentar_von_usersky, 
+                    "username_KEY": username_usersky}
         )
 
 
+
+@app.post("/ErneutPosten", response_class=HTMLResponse)
+async def create_new_beitrag(request: Request, neuer_kommentar_user = Form(), neuer_username_user = Form(default_usr)):
+    
+    beitrag_speicher_list.append({
+        "neuer_kommentar_user_KEY": neuer_kommentar_user, 
+        "neuer_username_user_KEY": neuer_username_user
+    })
+        
+    return RedirectResponse("/", status_code=303)
+    #für updates oder sowas?
 
 #KEY muss gleich heisen wie variable im TEMPLATE VON JINJA2 damit ein austausch stattfinden kann
 #VALUE kann sonst wie heisen es enthält mein INPUT (DATEN) vom index.html (input feld)

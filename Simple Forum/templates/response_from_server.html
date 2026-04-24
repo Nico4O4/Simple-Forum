@@ -5,21 +5,10 @@
     <title>Simple Forum V1.0</title>
 </head>
 <body>
-    {% for post in posts %}
     <h5>Username: {{ username_KEY }} </h5>
     <p>Comment: {{ kommentar_user_KEY }} </p>    
     <!--die variable die  genutzt wird als "austauscher"-->
-    {% endfor %}
-
-    <form action="/ErneutPosten" method="post">
-        <input type="text" name="neu_kommentar_user_KEY" placeholder="Comment..." required>
-        <input type="text" name="neu_username_KEY" placeholder="Username..">
-
-        <button value="/ErneutPosten">
-            Upload
-        </button>
     
-    </form>
 
 </body>
 </html>

@@ -29,9 +29,7 @@ async def show_index_frontend(request: Request):
 
 
 @app.post("/hochladen", response_class=HTMLResponse)
-async def create_beitrag(request: Request, kommentar_von_usersky = Form(), 
-                         username_usersky = Form(default_usr)
-                         ):
+async def create_beitrag(request: Request, kommentar_von_usersky = Form(), username_usersky = Form(default_usr)):
 
     return jja2_templates.TemplateResponse(    
         request=request,
@@ -41,18 +39,6 @@ async def create_beitrag(request: Request, kommentar_von_usersky = Form(),
         )
 
 
-
-@app.post("/ErneutPosten", response_class=HTMLResponse)
-async def create_new_beitrag(request: Request, neuer_kommentar_user = Form(), neuer_username_user = Form(default_usr)):
-    
-    beitrag_speicher_list.append({
-        "neuer_kommentar_user_KEY": neuer_kommentar_user, 
-        "neuer_username_user_KEY": neuer_username_user
-    })
-        
-    return RedirectResponse("/", status_code=303)
-    #für updates oder sowas?
-
 #KEY muss gleich heisen wie variable im TEMPLATE VON JINJA2 damit ein austausch stattfinden kann
 #VALUE kann sonst wie heisen es enthält mein INPUT (DATEN) vom index.html (input feld)
 
@@ -61,5 +47,4 @@ if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
 
 #--notes--
-#wenn man zur site gebracht wird per post request nochmals ne art endpoint logik / upload
-#logik schreiben das man weiterhin posts schreiben kann
+#war eine Übung gewesen um GET und POST Requests zu verstehen
